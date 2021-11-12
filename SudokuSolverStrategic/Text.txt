@@ -1,0 +1,24 @@
+Stream of consciousness:
+
+To solve a sudoku puzzle we must first develop a concept of a sudoku puzzle:
+
+Each board is made up of squares that form 3 groups: rows, columns, boxes.
+	Board size may be 9x9, 16x16, etc.
+	Assume 9x9 for first pass.
+The board is the collection of all squares
+Each square must have a unique identity that places it in context with other squares. Use x,y coordinates for first pass.
+Each square must have a concept of the groups that its in, so it can check (and only check) the appropriate row, column, and box.
+	This can just be a collection of squares identified for each square as part of constructing the board.
+Each square must hold an integer between 0 and 9
+	Initialized to contain a clue or 0.
+Board will be initialized from file for clues, eventually generate boards using these same algorithms.
+
+Once we have a puzzle, we can begin solving that puzzle:
+
+The solver fills in empty squares with correct values, cannot change clues.
+The solver maintains a concept of what could go in a square.
+Solver uses established human strategies independently of one another to measure difficulty. 
+	Start with naked singles.
+	Add basic backtracking
+
+Once we can solve all puzzles, we can generate puzzles and prove their validity:
