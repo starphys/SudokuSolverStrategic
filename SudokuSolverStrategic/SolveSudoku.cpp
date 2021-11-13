@@ -10,5 +10,18 @@ int main(void) {
 	toSolve.fillFromCSV(fin);
 	toSolve.printBoard();
 
+	Solver puzzleSolver{ toSolve };
+	puzzleSolver.gradeBoard();
+	puzzleSolver.nakedSingles();
+	toSolve.printBoard();
+
+	puzzleSolver.gradeBoard();
+	puzzleSolver.nakedSingles();
+	toSolve.printBoard();
+
+	puzzleSolver.gradeBoard();
+	puzzleSolver.nakedSingles();
+	toSolve.printBoard();
+
 	return 0;
 }

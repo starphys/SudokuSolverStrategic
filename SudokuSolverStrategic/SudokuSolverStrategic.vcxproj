@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Solver.h" />
     <ClInclude Include="SudokuHeaders.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Square.h" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Position.cpp" />
+    <ClCompile Include="Solver.cpp" />
     <ClCompile Include="SolveSudoku.cpp" />
     <ClCompile Include="Square.cpp" />
   </ItemGroup>

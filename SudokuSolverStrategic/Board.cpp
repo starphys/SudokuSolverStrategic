@@ -9,8 +9,8 @@ Board::Board() {
 	}
 
 }
-Board::~Board() {}
 
+Board::~Board() {}
 
 void Board::fillFromCSV(std::fstream& input) {
 	//Assume CSV is a series of lines of SIDE_LENGTH for a total of SIDE_LENGTH^2 values
@@ -23,18 +23,25 @@ void Board::fillFromCSV(std::fstream& input) {
 		for (int j = 0; j < SIDE_LENGTH; ++j) {
 			std::getline(stream, val, ',');
 			if (!(val.empty())) {
-				(*getSquareAt(findIndex(i, j))).value = std::stoi(val);
+				(*getSquareAt(findIndex(i, j))).setValue(std::stoi(val));
+				(*getSquareAt(findIndex(i, j))).setClue(true);
 			}
 		}
 	}
 }
 
-
 void Board::printBoard() {
+	//TODO: clean up this method of printing a board, it's sloppy
+	int i = 1;
 
 	std::cout << "Sudoku Board Current State:\n";
 	for (std::vector<std::shared_ptr<Square>>::iterator it = squares.begin(); it != squares.end(); ++it) {
 			std::cout << **it;
+			if (i == SIDE_LENGTH) {
+				std::cout << '\n';
+				i = 0;
+			}
+			++i;
 	}
 	std::cout << '\n';
 }
@@ -53,7 +60,7 @@ Position Board::findPosition(int index) {
 	return Position{ i,j };
 }
 
-std::shared_ptr<Square> Board::getSquareAt(Position& pos) {
+std::shared_ptr<Square> Board::getSquareAt(Position pos) {
 	return getSquareAt(findIndex(pos));
 }
 
