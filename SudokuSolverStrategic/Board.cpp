@@ -11,6 +11,7 @@ Board::Board() {
 }
 Board::~Board() {}
 
+
 void Board::fillFromCSV(std::fstream& input) {
 	//Assume CSV is a series of lines of SIDE_LENGTH for a total of SIDE_LENGTH^2 values
 	std::string line, val;
@@ -27,6 +28,7 @@ void Board::fillFromCSV(std::fstream& input) {
 		}
 	}
 }
+
 
 void Board::printBoard() {
 

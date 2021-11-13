@@ -7,6 +7,7 @@
 #include <sstream>
 
 
+
 class Board
 {
 private:
@@ -14,7 +15,9 @@ private:
 
 	//Constants to be re-examined in future improvements
 	const int MAX_SQUARES = 81;
+
 	const int SIDE_LENGTH = 9;
+
 public:
 	Board();
 	~Board();
@@ -29,6 +32,5 @@ public:
 
 	std::shared_ptr<Square> getSquareAt(Position& pos);
 	std::shared_ptr<Square> getSquareAt(int index);
-
 };
 
