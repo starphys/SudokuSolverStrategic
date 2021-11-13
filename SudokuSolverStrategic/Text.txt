@@ -7,6 +7,7 @@ Each board is made up of squares that form 3 groups: rows, columns, boxes.
 	Assume 9x9 for first pass.
 The board is the collection of all squares
 Each square must have a unique identity that places it in context with other squares. Use x,y coordinates for first pass.
+
 Each square must have a concept of the groups that its in, so it can check (and only check) the appropriate row, column, and box.
 	This can just be a collection of squares identified for each square as part of constructing the board.
 Each square must hold an integer between 0 and 9
