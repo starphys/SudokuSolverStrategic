@@ -12,10 +12,11 @@ void Square::findGroups() {
 		groups.insert({ i, position.y });
 	}
 
-	//Find Box
+	//Find box bounds
 	int boxX = (position.x/BOX_SIZE)*BOX_SIZE;
 	int boxY = (position.y/BOX_SIZE)*BOX_SIZE;
 
+	//Add all box squares to groups
 	for (int i = boxX; i < boxX + BOX_SIZE; ++i) {
 		for (int j = boxY; j < boxY + BOX_SIZE; ++j) {
 			groups.insert({ i,j });
@@ -34,6 +35,6 @@ void Square::setPosition(int newX, int newY) {
 }*/
 
 std::ostream& operator<< (std::ostream& os, Square& sq) {
-	os << sq.getPosition();
+	os << sq.value << "|";
 	return os;
 }
