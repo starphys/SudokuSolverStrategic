@@ -17,9 +17,28 @@ Board will be initialized from file for clues, eventually generate boards using 
 Once we have a puzzle, we can begin solving that puzzle:
 
 The solver fills in empty squares with correct values, cannot change clues.
-The solver maintains a concept of what could go in a square.
+The solver maintains a list of candidates for every square.
 Solver uses established human strategies independently of one another to measure difficulty. 
 	Start with naked singles.
 	Add basic backtracking
 
 Once we can solve all puzzles, we can generate puzzles and prove their validity:
+
+
+Redesign:
+SudokuEngine combines all of the planned functionality:
+	Puzzle holder
+		Data structure to hold cells, candidates, etc
+			Board holds a collection of SIDE_LENGTH*SIDE_LENGTH squares
+				Print all squares, return specific squares, convert from indices to Positions and back
+			Squares hold Position, values, candidates, groups to check for candidates, and clue status
+				Position simplifies otherwise messy index math
+				Groups reduce operations to search for conflicts
+					TODO: Groups based on SIDE_LENGTH which should be passed in by board. Boxes should be defined algorithmically.
+				Clue status means this box cannot be written to and has no candidates.
+		Dynamic allocation allows larger sudoku in the future
+	Puzzle maker
+		Board filler that populates state with a new or existing puzzle
+	Puzzle solver
+		Puzzle validator the proves single solvability of puzzle
+		Grader that solves the puzzle using human methods and assigns grade
