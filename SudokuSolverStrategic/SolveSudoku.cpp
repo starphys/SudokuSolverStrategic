@@ -7,7 +7,7 @@ int main(void) {
 	PuzzleMaker maker {&toSolve};
 
 	std::fstream fin;
-	fin.open("sudokutosolve1.csv", std::fstream::in);
+	fin.open("sudokutosolve2.csv", std::fstream::in);
 
 	maker.fillFromCSV(fin);
 	toSolve.printBoard();
