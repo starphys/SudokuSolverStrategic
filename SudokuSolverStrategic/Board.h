@@ -21,7 +21,7 @@ public:
 	Board();
 	~Board();
 
-	void fillFromCSV(std::fstream& input);
+
 	void printBoard();
 
 	int findIndex(int i, int j);
