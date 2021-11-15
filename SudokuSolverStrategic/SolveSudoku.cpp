@@ -4,10 +4,12 @@ int main(void) {
 	Board toSolve{};
 	toSolve.printBoard();
 
+	PuzzleMaker maker {&toSolve};
+
 	std::fstream fin;
 	fin.open("sudokutosolve1.csv", std::fstream::in);
 
-	toSolve.fillFromCSV(fin);
+	maker.fillFromCSV(fin);
 	toSolve.printBoard();
 
 	Solver puzzleSolver{ toSolve };

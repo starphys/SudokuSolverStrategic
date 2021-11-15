@@ -12,24 +12,6 @@ Board::Board() {
 
 Board::~Board() {}
 
-void Board::fillFromCSV(std::fstream& input) {
-	//Assume CSV is a series of lines of SIDE_LENGTH for a total of SIDE_LENGTH^2 values
-	std::string line, val;
-
-	for (int i = 0; i < SIDE_LENGTH; ++i) {
-		std::getline(input, line);
-		std::stringstream stream(line);
-
-		for (int j = 0; j < SIDE_LENGTH; ++j) {
-			std::getline(stream, val, ',');
-			if (!(val.empty())) {
-				(*getSquareAt(findIndex(i, j))).setValue(std::stoi(val));
-				(*getSquareAt(findIndex(i, j))).setClue(true);
-			}
-		}
-	}
-}
-
 void Board::printBoard() {
 	//TODO: clean up this method of printing a board, it's sloppy
 	int i = 1;
