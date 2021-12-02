@@ -10,7 +10,6 @@ private:
 	bool clue = false;
 	int value = 0;
 
-	void initCandidates();
 	void findGroups();
 
 	//Constants to be re-examined in future improvements
@@ -20,6 +19,8 @@ public:
 	Square(int i, int j);
 	Square(Position& pos);
 	~Square();
+
+	void initCandidates();
 
 	void setPosition(int newX, int newY);
 	Position& getPosition() { return position; };
@@ -32,7 +33,6 @@ public:
 
 	//std::ostream& operator<< (std::ostream& os);
 	friend std::ostream& operator<< (std::ostream& os, Square& sq);
-
 
 	std::set<int> candidates{};
 	std::set<Position> groups{};
