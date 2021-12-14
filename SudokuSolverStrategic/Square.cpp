@@ -2,11 +2,9 @@
 
 Square::Square(int i = 0, int j = 0) : position{ i,j } {
 	findGroups();
-	initCandidates();
 }
 Square::Square(Position& pos) : position{ pos } {
 	findGroups();
-	initCandidates();
 }
 Square::~Square() {}
 
@@ -55,12 +53,7 @@ void Square::setValue(int val) {
 	value = val;
 }
 
-/*std::ostream& Square::operator<< (std::ostream& os) {
-	os << &position;
-	return os;
-}*/
-
 std::ostream& operator<< (std::ostream& os, Square& sq) {
-	os << sq.value << "|";
+	os << sq.value;
 	return os;
 }

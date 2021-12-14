@@ -13,6 +13,7 @@ private:
 	void findGroups();
 
 	//Constants to be re-examined in future improvements
+	//TODO: Figure out the most appropriate way to do this. May just need to add a parameter to the constructor. 
 	const int BOX_SIZE = 3;
 	const int SIDE_LEN = 9;
 public:
@@ -31,7 +32,6 @@ public:
 	void setValue(int val);
 	int getValue() { return value; }
 
-	//std::ostream& operator<< (std::ostream& os);
 	friend std::ostream& operator<< (std::ostream& os, Square& sq);
 
 	std::set<int> candidates{};
