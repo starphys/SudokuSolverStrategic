@@ -9,7 +9,6 @@ public:
 
 	bool operator== (const Position& right) const;
 	bool operator< (const Position& right) const;
-	//std::ostream& operator<< (std::ostream& os);
 
 	friend std::ostream& operator<< (std::ostream& os, const Position& pos);
 

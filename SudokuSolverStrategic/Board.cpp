@@ -1,26 +1,23 @@
 #include "Board.h"
 
-Board::Board() {
-	for (int i = 0; i < 9; ++i) {
-		for (int j = 0; j < 9; ++j) {
+Board::Board(int sideLen) : sideLength(sideLen), totalSquares(sideLen*sideLen) {
+	for (int i = 0; i < sideLength; ++i) {
+		for (int j = 0; j < sideLength; ++j) {
 			std::shared_ptr<Square> newSquare (new Square{ i,j });
 			squares.push_back(std::move(newSquare));
 		}
 	}
-
 }
 
 Board::~Board() {}
 
 void Board::printBoard() {
-	//TODO: clean up this method of printing a board, it's sloppy
 	int i = 1;
 
-	std::cout << "Sudoku Board Current State:\n";
 	for (std::vector<std::shared_ptr<Square>>::iterator it = squares.begin(); it != squares.end(); ++it) {
-			std::cout << **it;
-			if (i == SIDE_LENGTH) {
-				std::cout << '\n';
+		std::cout << "|" << **it;
+			if (i == sideLength) {
+				std::cout << "|\n";
 				i = 0;
 			}
 			++i;
@@ -29,15 +26,15 @@ void Board::printBoard() {
 }
 
 int Board::findIndex(int i, int j) {
-	return i * SIDE_LENGTH + j;
+	return i * sideLength + j;
 }
 int Board::findIndex(Position& pos) {
-	return pos.x * SIDE_LENGTH + pos.y;
+	return pos.x * sideLength + pos.y;
 }
 
 Position Board::findPosition(int index) {
-	int i = index / SIDE_LENGTH;
-	int j = index % SIDE_LENGTH;
+	int i = index / sideLength;
+	int j = index % sideLength;
 
 	return Position{ i,j };
 }

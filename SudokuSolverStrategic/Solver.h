@@ -17,6 +17,8 @@ public:
 
 	bool nakedSingles();
 	bool backtrack();
+	bool isSolved();
+
 	int gradeBoard();
 };
 

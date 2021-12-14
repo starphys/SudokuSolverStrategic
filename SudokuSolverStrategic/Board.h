@@ -14,11 +14,11 @@ private:
 	std::vector<std::shared_ptr<Square>> squares;
 
 	//Constants to be re-examined in future improvements
-	const int MAX_SQUARES = 81;
-	const int SIDE_LENGTH = 9;
+	int totalSquares;
+	int sideLength;
 
 public:
-	Board();
+	Board(int sideLen = 9);
 	~Board();
 
 
@@ -32,6 +32,6 @@ public:
 	std::shared_ptr<Square> getSquareAt(Position pos);
 	std::shared_ptr<Square> getSquareAt(int index);
 
-	int size() { return MAX_SQUARES; }
+	int size() { return totalSquares; }
 };
 

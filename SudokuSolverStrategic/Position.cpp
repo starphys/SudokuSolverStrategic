@@ -15,11 +15,6 @@ bool Position::operator< (const Position& right) const {
 	return false;
 }
 
-/*std::ostream& Position::operator<< (std::ostream& os) {
-	os << "(\t" << x << ",\t" << y << ")";
-	return os;
-}*/
-
 std::ostream& operator<< (std::ostream& os, const Position& pos) {
 	os << "(" << pos.x << "," << pos.y << ")";
 	return os;

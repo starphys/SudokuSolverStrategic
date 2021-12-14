@@ -13,6 +13,9 @@ void Solver::updateCandidates() {
 
 		//Only update non-clue candidates
 		if (!tempSquare->isClue()) {
+			//Assume all possible values are candidates
+			tempSquare->initCandidates();
+
 			//Check each position in this square's groups for values. If a non-zero value is found, remove from candidates
 			for (std::set<Position>::iterator groupsIter = tempSquare->groups.begin(); groupsIter != tempSquare->groups.end(); ++groupsIter) {
 				int tempVal = toSolve.getSquareAt(*groupsIter)->getValue();
@@ -21,11 +24,13 @@ void Solver::updateCandidates() {
 				}
 			}
 		}
-		else {}
 	}
 }
 
+//Naked singles always populates the correct values it found. Return false if nothing was placed
 bool Solver::nakedSingles() {
+	bool valuePlaced = false;
+
 	//Temporary pointer for simplicity
 	std::shared_ptr<Square> tempSquare;
 
@@ -39,11 +44,16 @@ bool Solver::nakedSingles() {
 			if (tempSquare->candidates.size() == 1) {
 				tempSquare->setValue(*tempSquare->candidates.begin());
 				tempSquare->candidates.clear();
+				valuePlaced = true;
+				
+				//This is so applying other solving algorithms doesn't change what is known to be the correct value. 
+				//TODO: revisit this, there may be a more robust approach
 				tempSquare->setClue(true);
+
 			}
 		}
 	}
-	return false;
+	return valuePlaced;
 }
 
 bool Solver::backtrack() {
@@ -106,6 +116,9 @@ bool Solver::backtrackRecurHelper(std::shared_ptr<Square> thisSquare) {
 
 void Solver::findCandidatesSquare(std::shared_ptr<Square> thisSquare) {
 	if (!thisSquare->isClue()) {
+		//Assume all possible values are candidates
+		thisSquare->initCandidates();
+
 		//Check each position in this square's groups for values. If a non-zero value is found, remove from candidates
 		for (std::set<Position>::iterator groupsIter = thisSquare->groups.begin(); groupsIter != thisSquare->groups.end(); ++groupsIter) {
 			int tempVal = toSolve.getSquareAt(*groupsIter)->getValue();
@@ -116,7 +129,41 @@ void Solver::findCandidatesSquare(std::shared_ptr<Square> thisSquare) {
 	}
 }
 
-int Solver::gradeBoard() {
+bool Solver::isSolved() {
 	updateCandidates();
-	return 0;
+	
+	//Temporary pointer for simplicity
+	std::shared_ptr<Square> tempSquare;
+
+	//Iterate through entire board
+	for (int i = 0; i < toSolve.size(); ++i) {
+		tempSquare = toSolve.getSquareAt(i);
+
+		if (!tempSquare->candidates.empty()) {
+			return false;
+		}
+	}
+	return true;
+}
+
+int Solver::gradeBoard() {
+	int i = 1;
+	bool singles = true;
+
+	while (singles) {
+		updateCandidates();
+		singles = nakedSingles();
+		std::cout << "Puzzle after " << i << " passes of naked singles algorithm:\n";
+		toSolve.printBoard();
+		++i;
+	}
+
+	if (isSolved()) {
+		return i - 1;
+	}
+
+	backtrack();
+	std::cout << "Puzzle after backtracking:\n";
+	toSolve.printBoard();
+	return 1000;
 }
