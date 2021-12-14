@@ -7,22 +7,20 @@ int main(void) {
 	PuzzleMaker maker {&toSolve};
 
 	std::fstream fin;
-	fin.open("sudokutosolve2.csv", std::fstream::in);
+	fin.open("sudokutosolve3.csv", std::fstream::in);
 
 	maker.fillFromCSV(fin);
 	toSolve.printBoard();
 
 	Solver puzzleSolver{ toSolve };
+	//May be unnecessary
 	puzzleSolver.gradeBoard();
-	puzzleSolver.nakedSingles();
-	toSolve.printBoard();
 
-	puzzleSolver.gradeBoard();
-	puzzleSolver.nakedSingles();
-	toSolve.printBoard();
-
-	puzzleSolver.gradeBoard();
-	puzzleSolver.nakedSingles();
+	if (puzzleSolver.backtrack())
+		std::cout << "Success.\n";
+	else
+		std::cout << "Failure.\n";
+	
 	toSolve.printBoard();
 
 	return 0;
