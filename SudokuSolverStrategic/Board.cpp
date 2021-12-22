@@ -29,7 +29,7 @@ int Board::findIndex(int i, int j) {
 	return i * sideLength + j;
 }
 int Board::findIndex(Position& pos) {
-	return pos.x * sideLength + pos.y;
+	return pos.getX() * sideLength + pos.getY();
 }
 
 Position Board::findPosition(int index) {
