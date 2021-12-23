@@ -3,8 +3,11 @@
 
 class Position
 {
+protected:
+	int x;
+	int y;
 public:
-	Position(int i, int j);
+	Position(int i = 0, int j = 0);
 	~Position();
 
 	bool operator== (const Position& right) const;
@@ -12,7 +15,11 @@ public:
 
 	friend std::ostream& operator<< (std::ostream& os, const Position& pos);
 
-	int x = 0;
-	int y = 0;
+	int getX();
+	int getY();
+
+	void setPosition(int i, int j);
+	void setX(int i);
+	void setY(int j);
 };
 
